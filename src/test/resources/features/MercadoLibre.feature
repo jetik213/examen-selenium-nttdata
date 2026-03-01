@@ -1,7 +1,13 @@
-Feature: MercadoLibre
-@busquedaProducto
-  Scenario: Busqueda de Productos
-    Given estoy en la página de MercadoLibre
-    When busco un producto "Televisores Led 40 pulgadas"
-    Then una lista de resultados
-    And valido el primer titulo del resultado sea "Televisor inteligente S5400a LED Fhd Android Preta Tcl 110 V/220 V"
+# language: es
+@testfeature
+Característica: MercadoLibre
+  Yo, como usuario
+  Quiero, tener una opción para buscar productos
+  Para ver los productos que estoy interesado
+
+  @busquedaProducto
+  Escenario: Busqueda de Productos
+    Dado estoy en la página de MercadoLibre
+    Cuando busco un producto "Televisores Led 40 pulgadas"
+    Entonces una lista de resultados
+    Y valido el primer titulo del resultado sea "Smart Tv Samsung 40\" Fhd F6000F 2025 Black UN40F6000FGXPE"

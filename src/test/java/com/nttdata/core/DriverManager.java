@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverManager {
     private static WebDriver driver;
@@ -19,19 +20,8 @@ public class DriverManager {
 
     @Before(order = 0)
     public void setUp() {
-        // Detectar SO
-        String os = System.getProperty("os.name").toLowerCase();
-
-        if (os.contains("win")) {
-            // Windows OS
-            System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
-        } else if (os.contains("mac")) {
-            // Mac OS
-            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-        } else {
-            throw new IllegalStateException("Unsupported operating system: " + os);
-        }
-
+        WebDriverManager.chromedriver().setup();
+        
         // HTTP Factory
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
@@ -54,12 +44,13 @@ public class DriverManager {
         scenario.attach(evidencia, "image/png", "evidencias");
     }
 
-    public static void scrollDown(){
+    public static void scrollDown() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        // This  will scroll down the page by  1000 pixel vertical
+        // This will scroll down the page by 1000 pixel vertical
         js.executeScript("window.scrollBy(0,1000)");
     }
-    public static void esperaImplicita(){
+
+    public static void esperaImplicita() {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
